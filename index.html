@@ -1,159 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>QSL Card</title>
-  <style>
-    :root {
-      --bg-color-light: #f9f9f9;
-      --card-bg-light: rgba(255, 255, 255, 0.85);
-      --text-color-light: #000000;
-      --border-color-light: #000000;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QSL Card with Background Inside Card</title>
+<style>
+  :root {
+    --bg-color-light: #f9f9f9;
+    --card-bg-light: rgba(255 255 255 / 0.9);
+    --text-color-light: #000000;
+    --border-color-light: #000000;
 
-      --bg-color-dark: #121212;
-      --card-bg-dark: rgba(31, 31, 31, 0.85);
-      --text-color-dark: #e0e0e0;
-      --border-color-dark: #888;
+    --bg-color-dark: #121212;
+    --card-bg-dark: rgba(31 31 31 / 0.9);
+    --text-color-dark: #e0e0e0;
+    --border-color-dark: #888;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background: var(--bg-color-light);
+    padding: 40px;
+    color: var(--text-color-light);
+  }
+
+  body.dark {
+    background: var(--bg-color-dark);
+    color: var(--text-color-dark);
+  }
+
+  .qsl-card {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    background: var(--card-bg-light);
+    border: 2px solid var(--border-color-light);
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    color: var(--text-color-light);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  body.dark .qsl-card {
+    background: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+  }
+
+  /* Background image inside card, behind content */
+  .qsl-card::before {
+    content: "";
+    position: absolute;
+    top: 20px;    /* small padding so not flush to edge */
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: url('https://raw.githubusercontent.com/Rhyzen16/DY3ZXG-Qrz-Page/main/Images/HQimages/1744880701702_Diploma.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.15;
+    pointer-events: none; /* so it does not interfere with input */
+    z-index: 0;
+  }
+
+  .qsl-card > * {
+    position: relative;
+    z-index: 1; /* content on top of background */
+  }
+
+  .header h1 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+
+  .section {
+    border-bottom: 1px dashed #999;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+
+  .section label {
+    display: inline-block;
+    width: 160px;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .section input {
+    border: none;
+    border-bottom: 1px solid #333;
+    background: transparent;
+    padding: 4px 8px;
+    width: 200px;
+    font-family: inherit;
+    font-size: 14px;
+    color: inherit;
+    vertical-align: middle;
+  }
+
+  .message {
+    margin-top: 20px;
+    font-style: italic;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .footer {
+    text-align: right;
+    font-size: 14px;
+    margin-top: 30px;
+  }
+
+  .controls {
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(255 255 255 / 0.8);
+    border-radius: 8px;
+    padding: 8px 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+
+  body.dark .controls {
+    background: rgba(0 0 0 / 0.7);
+  }
+
+  button {
+    padding: 8px 16px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid currentColor;
+    border-radius: 6px;
+    background: transparent;
+    transition: background 0.25s, color 0.25s;
+    color: inherit;
+  }
+  button:hover {
+    background: currentColor;
+    color: var(--bg-color-light);
+  }
+
+  @media (max-width: 600px) {
+    .section label, .section input {
+      display: block;
+      width: 100%;
     }
-
-    body {
-      margin: 0;
-      font-family: 'Courier New', monospace;
-      /* Hardcoded background image here: */
-      background: url('https://raw.githubusercontent.com/Rhyzen16/DY3ZXG-Qrz-Page/main/Images/HQimages/1744880701702_Diploma.png') no-repeat center center fixed;
-      background-size: cover;
-      padding: 40px;
-      transition: background 0.3s, color 0.3s;
-      color: var(--text-color-light);
-    }
-
-    .qsl-card {
-      max-width: 800px;
-      margin: 0 auto;
-      background: var(--card-bg-light);
-      border: 2px solid var(--border-color-light);
-      padding: 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      color: var(--text-color-light);
-      backdrop-filter: blur(6px);
-      border-radius: 12px;
-    }
-
-    .header h1 {
-      margin: 0 0 20px 0;
-      font-size: 24px;
-      text-align: center;
-      letter-spacing: 2px;
-    }
-
-    .section {
-      border-bottom: 1px dashed #999;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-    }
-
     .section label {
-      display: inline-block;
-      width: 160px;
-      font-weight: bold;
-      vertical-align: middle;
+      margin-bottom: 6px;
     }
-
-    .section input {
-      border: none;
-      border-bottom: 1px solid #333;
-      background: transparent;
-      padding: 4px 8px;
-      width: 200px;
-      font-family: inherit;
-      font-size: 14px;
-      color: inherit;
-      vertical-align: middle;
-    }
-
-    .message {
-      margin-top: 20px;
-      font-style: italic;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .footer {
-      text-align: right;
-      font-size: 14px;
-      margin-top: 30px;
-    }
-
     .controls {
-      max-width: 800px;
-      margin: 0 auto 20px auto;
-      display: flex;
-      justify-content: flex-start;
-      gap: 10px;
+      justify-content: center;
+      gap: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 10px;
     }
+  }
 
-    button {
-      padding: 8px 16px;
-      font-family: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1.5px solid currentColor;
-      border-radius: 6px;
-      background: transparent;
-      transition: background 0.25s, color 0.25s;
+  @media print {
+    .controls {
+      display: none !important;
     }
-    button:hover {
-      background: currentColor;
-      color: var(--bg-color-light);
+    body {
+      background: white !important;
+      color: black !important;
     }
-
-    /* Dark mode overrides */
-    body.dark {
-      background: url('https://raw.githubusercontent.com/Rhyzen16/Qrz-gallery/main/1744880701702_Diploma.png') no-repeat center center fixed;
-      background-size: cover;
-      color: var(--text-color-dark);
+    .qsl-card {
+      background: white !important;
+      color: black !important;
+      border-color: black !important;
+      box-shadow: none !important;
     }
-    body.dark .qsl-card {
-      background: var(--card-bg-dark);
-      border-color: var(--border-color-dark);
-      color: var(--text-color-dark);
+    .qsl-card::before {
+      content: none !important; /* no bg image on print */
     }
-    body.dark button:hover {
-      color: var(--bg-color-dark);
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      .section label, .section input {
-        display: block;
-        width: 100%;
-      }
-      .section label {
-        margin-bottom: 6px;
-      }
-      .controls {
-        justify-content: center;
-        gap: 15px;
-      }
-    }
-
-    /* HIDE CONTROLS ON PRINT */
-    @media print {
-      .controls {
-        display: none;
-      }
-      body {
-        background: none !important;
-      }
-      .qsl-card {
-        background: white !important;
-        color: black !important;
-        border-color: black !important;
-        backdrop-filter: none !important;
-        box-shadow: none !important;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
