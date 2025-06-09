@@ -16,18 +16,15 @@
       --border-color-dark: #888;
     }
 
-    /* Base light theme */
     body {
       margin: 0;
       font-family: 'Courier New', monospace;
-      background: var(--bg-color-light);
+      /* Hardcoded background image here: */
+      background: url('https://raw.githubusercontent.com/Rhyzen16/Qrz-gallery/main/1744880701702_Diploma.png') no-repeat center center fixed;
+      background-size: cover;
       padding: 40px;
       transition: background 0.3s, color 0.3s;
       color: var(--text-color-light);
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
     }
 
     .qsl-card {
@@ -91,10 +88,8 @@
       max-width: 800px;
       margin: 0 auto 20px auto;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: flex-start;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
     button {
@@ -114,7 +109,8 @@
 
     /* Dark mode overrides */
     body.dark {
-      background: var(--bg-color-dark);
+      background: url('https://raw.githubusercontent.com/Rhyzen16/Qrz-gallery/main/1744880701702_Diploma.png') no-repeat center center fixed;
+      background-size: cover;
       color: var(--text-color-dark);
     }
     body.dark .qsl-card {
@@ -140,13 +136,29 @@
         gap: 15px;
       }
     }
+
+    /* HIDE CONTROLS ON PRINT */
+    @media print {
+      .controls {
+        display: none;
+      }
+      body {
+        background: none !important;
+      }
+      .qsl-card {
+        background: white !important;
+        color: black !important;
+        border-color: black !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="controls" role="region" aria-label="Controls">
   <button id="darkModeBtn" aria-pressed="false" title="Toggle Dark Mode">Toggle Dark Mode</button>
-  <button id="bgChangeBtn" title="Change Background Image">Set Background Image</button>
   <button id="printBtn" title="Print or Save as PDF">Print / Save</button>
 </div>
 
@@ -191,28 +203,11 @@
     darkModeBtn.setAttribute('aria-pressed', isDark);
   });
 
-  // Change Background image
-  const bgChangeBtn = document.getElementById('bgChangeBtn');
-  bgChangeBtn.addEventListener('click', () => {
-    const url = prompt("Enter a direct background image URL (must end with .jpg/.png/etc.):");
-    if (url) {
-      document.body.style.backgroundImage = `url('${url}')`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center center';
-      document.body.style.backgroundRepeat = 'no-repeat';
-      document.body.style.backgroundAttachment = 'fixed';
-    }
-  });
-
   // Print functionality
   const printBtn = document.getElementById('printBtn');
   printBtn.addEventListener('click', () => {
     window.print();
   });
-
-  // Optional: Load saved theme or background (using localStorage) - to persist on reload
-  // (Can add if you want; let me know!)
-
 </script>
 
 </body>
