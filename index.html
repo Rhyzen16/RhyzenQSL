@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>QSL Card</title>
+  <meta charset="UTF-8" />
+  <title>QSL Card with Background</title>
   <style>
     :root {
       --bg-color: #f9f9f9;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.85);
       --text-color: #000000;
       --border-color: #000000;
     }
@@ -14,9 +14,11 @@
     body {
       margin: 0;
       font-family: 'Courier New', monospace;
-      background: var(--bg-color);
+      background: url('https://raw.githubusercontent.com/Rhyzen16/Qrz-gallery/main/1744880701702_Diploma.png') no-repeat center center fixed;
+      background-size: cover;
       padding: 40px;
       transition: background 0.3s, color 0.3s;
+      color: var(--text-color);
     }
 
     .qsl-card {
@@ -27,6 +29,8 @@
       padding: 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       color: var(--text-color);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
     }
 
     .header h1 {
@@ -87,7 +91,7 @@
     /* Dark Mode */
     body.dark {
       --bg-color: #121212;
-      --card-bg: #1f1f1f;
+      --card-bg: rgba(31, 31, 31, 0.85);
       --text-color: #e0e0e0;
       --border-color: #888;
     }
