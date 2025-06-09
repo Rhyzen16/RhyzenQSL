@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QSL Card with Background Inside Card</title>
+<title>QSL Card with Image in HTML</title>
 <style>
   :root {
     --bg-color-light: #f9f9f9;
@@ -49,24 +49,25 @@
     color: var(--text-color-dark);
   }
 
-  /* Background image inside card, behind content */
-  .qsl-card::before {
-    content: "";
+  /* Background image as an HTML img inside the card */
+  .qsl-bg-image {
     position: absolute;
-    top: 20px;    /* small padding so not flush to edge */
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    background: url('https://raw.githubusercontent.com/Rhyzen16/DY3ZXG-Qrz-Page/main/Images/HQimages/1744880701702_Diploma.png') no-repeat center center;
-    background-size: contain;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    object-fit: contain;
     opacity: 0.15;
-    pointer-events: none; /* so it does not interfere with input */
+    pointer-events: none; /* so inputs work */
+    user-select: none;
     z-index: 0;
   }
 
   .qsl-card > * {
     position: relative;
-    z-index: 1; /* content on top of background */
+    z-index: 1; /* content above image */
   }
 
   .header h1 {
@@ -182,8 +183,9 @@
       border-color: black !important;
       box-shadow: none !important;
     }
-    .qsl-card::before {
-      content: none !important; /* no bg image on print */
+    /* keep background image in print */
+    .qsl-bg-image {
+      opacity: 0.1 !important;
     }
   }
 </style>
@@ -196,6 +198,14 @@
 </div>
 
 <div class="qsl-card" role="main" aria-label="QSL Card">
+  <!-- Background image as HTML -->
+  <img
+    src="https://raw.githubusercontent.com/Rhyzen16/DY3ZXG-Qrz-Page/main/Images/HQimages/1744880701702_Diploma.png"
+    alt="Diploma background"
+    class="qsl-bg-image"
+    aria-hidden="true"
+  />
+
   <div class="header">
     <h1>QSL CONFIRMATION</h1>
   </div>
