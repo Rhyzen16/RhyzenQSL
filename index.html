@@ -2,112 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QSL Card</title>
   <style>
+    :root {
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-color: #000000;
+      --border-color: #000000;
+    }
+
     body {
-      margin: 40px;
-      background: #eaeaea;
-      font-family: sans-serif;
+      margin: 0;
+      padding: 40px;
+      font-family: 'Courier New', monospace;
+      background: #f0f0f0;
+      color: var(--text-color);
     }
 
     .qsl-card {
-      position: relative;
-      width: 800px;
-      height: 500px;
-      margin: auto;
-      border: 2px solid #000;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      background: #fff;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-image: url('https://github.com/Rhyzen16/DY3ZXG-Qrz-Page/blob/main/Images/HQimages/1744880701702_Diploma.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(4px);
     }
 
-    /* The background image fills the card */
-    .qsl-card img.background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      opacity: 0.2; /* Adjust if needed */
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .qsl-content {
-      position: relative;
-      z-index: 1;
-      padding: 20px;
-      color: #000;
+    .header h1 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
+      text-align: center;
+      letter-spacing: 2px;
+      background-color: rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 6px;
     }
 
     .section {
-      margin-bottom: 12px;
+      border-bottom: 1px dashed #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      border-radius: 6px;
     }
 
-    label {
+    .section label {
       display: inline-block;
-      width: 120px;
+      width: 160px;
       font-weight: bold;
     }
 
-    input {
-      padding: 4px 6px;
+    .section input {
+      border: none;
+      border-bottom: 1px solid #333;
+      background: transparent;
+      padding: 4px 8px;
       width: 200px;
-      font-family: monospace;
+      font-family: inherit;
       font-size: 14px;
+      color: inherit;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-style: italic;
+      text-align: center;
+      font-weight: 600;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .footer {
+      text-align: right;
+      font-size: 14px;
+      margin-top: 30px;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      border-radius: 6px;
     }
 
     @media print {
       body {
-        background: white;
+        background: none !important;
+        padding: 0;
       }
+
       .qsl-card {
-        box-shadow: none;
+        box-shadow: none !important;
+        border: 1px solid black !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        color: black !important;
+      }
+
+      input {
+        color: black !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section label,
+      .section input {
+        display: block;
+        width: 100%;
+      }
+
+      .section label {
+        margin-bottom: 6px;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="qsl-card">
-  <!-- Background image inside the card -->
-  <img class="background" src="https://raw.githubusercontent.com/Rhyzen16/DY3ZXG-Qrz-Page/main/Images/HQimages/1744880701702_Diploma.png" alt="Background" />
+<div class="qsl-card" role="main" aria-label="QSL Card">
+  <div class="header">
+    <h1>QSL CONFIRMATION</h1>
+  </div>
 
-  <div class="qsl-content">
-    <h2>QSL CONFIRMATION</h2>
+  <div class="section">
+    <div><label for="fromCall">From:</label> <input id="fromCall" type="text" value="N0CALL" name="fromCall"/></div>
+    <div><label for="name">Name:</label> <input id="name" type="text" value="John Doe" name="name"/></div>
+    <div><label for="qth">QTH:</label> <input id="qth" type="text" value="Denver, CO, USA" name="qth"/></div>
+  </div>
 
-    <div class="section">
-      <label for="fromCall">From:</label>
-      <input id="fromCall" type="text" value="N0CALL" />
-    </div>
+  <div class="section">
+    <div><label for="toCall">To Radio:</label> <input id="toCall" type="text" placeholder="Callsign" name="toCall"/></div>
+    <div><label for="date">Date:</label> <input id="date" type="date" name="date"/></div>
+    <div><label for="time">Time (UTC):</label> <input id="time" type="time" name="time"/></div>
+    <div><label for="band">Band:</label> <input id="band" type="text" placeholder="20m" name="band"/></div>
+    <div><label for="freq">Frequency:</label> <input id="freq" type="text" placeholder="14.070 MHz" name="freq"/></div>
+    <div><label for="mode">Mode:</label> <input id="mode" type="text" placeholder="FT8 / SSB / CW" name="mode"/></div>
+    <div><label for="rstSent">RST Sent:</label> <input id="rstSent" type="text" placeholder="599" name="rstSent"/></div>
+    <div><label for="rstRecv">RST Received:</label> <input id="rstRecv" type="text" placeholder="579" name="rstRecv"/></div>
+  </div>
 
-    <div class="section">
-      <label for="toCall">To:</label>
-      <input id="toCall" type="text" value="DY3ZXG" />
-    </div>
+  <div class="message">
+    TNX FOR THE QSO &amp; NICE TO MEET YOU ON THE AIR!<br />
+    73 &amp; BEST DX!
+  </div>
 
-    <div class="section">
-      <label for="date">Date:</label>
-      <input id="date" type="date" />
-    </div>
-
-    <div class="section">
-      <label for="time">Time (UTC):</label>
-      <input id="time" type="time" />
-    </div>
-
-    <div class="section">
-      <label for="band">Band:</label>
-      <input id="band" type="text" placeholder="20m" />
-    </div>
-
-    <div class="section">
-      <label for="mode">Mode:</label>
-      <input id="mode" type="text" placeholder="FT8 / CW / SSB" />
-    </div>
+  <div class="footer">
+    Signed: ____________________ &nbsp;&nbsp; | &nbsp;&nbsp; Grid: __________
   </div>
 </div>
 
