@@ -21,9 +21,8 @@
       margin: 0 auto;
       box-sizing: border-box;
       border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      position: relative; /* Needed for absolutely positioned note */
+      overflow: hidden;
     }
 
     .header h1 {
@@ -55,25 +54,22 @@
       font-size: 12px;
     }
 
-    .message {
+    /* Positioned message block */
+    .message-block {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      text-align: right;
+      font-size: 11px;
       font-style: italic;
-      text-align: center;
-      font-weight: 600;
-      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .signed-line {
       margin-top: 8px;
-      margin-bottom: 8px;
-    }
-
-    .footer {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      font-size: 11px;
-      gap: 20px;
-      margin-top: auto;
-    }
-
-    .footer-item {
+      font-style: normal;
+      font-weight: normal;
       white-space: nowrap;
     }
 
@@ -92,38 +88,35 @@
 <body>
 
 <div class="qsl-card">
-  <div>
-    <div class="header">
-      <h1>QSL CONFIRMATION</h1>
-    </div>
-
-    <div class="section">
-      <div class="row"><span class="label">From:</span> <span class="value">ZXG</span></div>
-      <div class="row"><span class="label">Name:</span> <span class="value">Rhyzen Bamba</span></div>
-      <div class="row"><span class="label">QTH:</span> <span class="value">Pulilan, Bulacan, PH</span></div>
-    </div>
-
-    <div class="section">
-      <div class="row"><span class="label">To Radio:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">Date:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">Time (UTC):</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">Band:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">Frequency:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">Mode:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">RST Sent:</span> <span class="value">__________</span></div>
-      <div class="row"><span class="label">RST Recv:</span> <span class="value">__________</span></div>
-    </div>
-
-    <div class="message">
-      TNX FOR THE QSO — NICE TO MEET YOU ON THE AIR!<br />
-      73 &amp; BEST DX!
-    </div>
+  <div class="header">
+    <h1>QSL CONFIRMATION</h1>
   </div>
 
-  <div class="footer">
-    <div class="footer-item">Signed: ____________________</div>
-    <div class="footer-item">Grid: __________</div>
+  <div class="section">
+    <div class="row"><span class="label">From:</span> <span class="value">ZXG</span></div>
+    <div class="row"><span class="label">Name:</span> <span class="value">Rhyzen Bamba</span></div>
+    <div class="row"><span class="label">QTH:</span> <span class="value">Pulilan, Bulacan, PH</span></div>
   </div>
+
+  <div class="section">
+    <div class="row"><span class="label">To Radio:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Date:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Time (UTC):</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Band:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Frequency:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Mode:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">RST Sent:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">RST Recv:</span> <span class="value">__________</span></div>
+  </div>
+
+  <!-- Floating message block -->
+  <div class="message-block">
+    TNX FOR THE QSO — NICE TO MEET YOU ON THE AIR!<br />
+    73 &amp; BEST DX!
+    <div class="signed-line">Signed: ____________________</div>
+    <div class="signed-line">Grid: __________</div>
+  </div>
+
 </div>
 
 </body>
