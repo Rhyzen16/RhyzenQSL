@@ -6,91 +6,110 @@
   <style>
     body {
       margin: 0;
+      padding: 40px;
       font-family: 'Courier New', monospace;
       background: #f9f9f9;
-      padding: 40px;
       color: #000;
     }
 
     .qsl-card {
-      max-width: 800px;
+      width: 5.5in;
+      height: 3.5in;
+      background: #fff;
+      border: 2px dashed #000;
+      padding: 20px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.85);
-      border: 2px solid #000;
-      padding: 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      color: #000;
-      border-radius: 12px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .header h1 {
-      margin: 0 0 20px 0;
-      font-size: 24px;
+      margin: 0 0 10px 0;
+      font-size: 18px;
       text-align: center;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
     }
 
     .section {
       border-bottom: 1px dashed #999;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
     }
 
     .row {
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .label {
       display: inline-block;
-      width: 160px;
+      width: 100px;
       font-weight: bold;
+      font-size: 12px;
     }
 
     .value {
       display: inline-block;
+      font-size: 12px;
     }
 
     .message {
-      margin-top: 20px;
       font-style: italic;
       text-align: center;
       font-weight: 600;
+      font-size: 11px;
+      margin-top: 5px;
     }
 
     .footer {
       text-align: right;
-      font-size: 14px;
-      margin-top: 30px;
+      font-size: 11px;
+      margin-top: 10px;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: none;
+      }
+      .qsl-card {
+        margin: 0;
+        box-shadow: none;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="qsl-card">
-  <div class="header">
-    <h1>QSL CONFIRMATION</h1>
-  </div>
+  <div>
+    <div class="header">
+      <h1>QSL CONFIRMATION</h1>
+    </div>
 
-  <div class="section">
-    <div class="row"><span class="label">From:</span> <span class="value">N0CALL</span></div>
-    <div class="row"><span class="label">Name:</span> <span class="value">John Doe</span></div>
-    <div class="row"><span class="label">QTH:</span> <span class="value">Denver, CO, USA</span></div>
-  </div>
+    <div class="section">
+      <div class="row"><span class="label">From:</span> <span class="value">ZXG</span></div>
+      <div class="row"><span class="label">Name:</span> <span class="value">Rhyzen</span></div>
+      <div class="row"><span class="label">QTH:</span> <span class="value">Pulilan, Bulacan, PH</span></div>
+    </div>
 
-  <div class="section">
-    <div class="row"><span class="label">To Radio:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">Date:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">Time (UTC):</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">Band:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">Frequency:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">Mode:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">RST Sent:</span> <span class="value">__________</span></div>
-    <div class="row"><span class="label">RST Received:</span> <span class="value">__________</span></div>
-  </div>
+    <div class="section">
+      <div class="row"><span class="label">To Radio:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">Date:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">Time (UTC):</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">Band:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">Frequency:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">Mode:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">RST Sent:</span> <span class="value">__________</span></div>
+      <div class="row"><span class="label">RST Recv:</span> <span class="value">__________</span></div>
+    </div>
 
-  <div class="message">
-    TNX FOR THE QSO &amp; NICE TO MEET YOU ON THE AIR!<br />
-    73 &amp; BEST DX!
+    <div class="message">
+      TNX FOR THE QSO &amp; NICE TO MEET YOU ON THE AIR!<br />
+      73 &amp; BEST DX!
+    </div>
   </div>
 
   <div class="footer">
