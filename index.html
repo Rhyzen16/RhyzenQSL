@@ -3,73 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <title>QSL Card</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Courier New', monospace;
-      background: #eee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .qsl-container {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      aspect-ratio: 11 / 8.5;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
-      background: white;
-    }
-
-    .qsl-container img.bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .qsl-card {
-      position: relative;
-      z-index: 1;
-      padding: 20px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(4px);
+      background: #f9f9f9;
+      padding: 40px;
       color: #000;
     }
 
-    .qsl-card h1 {
+    .qsl-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid #000;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      color: #000;
+      border-radius: 12px;
+    }
+
+    .header h1 {
+      margin: 0 0 20px 0;
+      font-size: 24px;
       text-align: center;
-      margin: 0 0 20px;
-      font-size: 1.6rem;
       letter-spacing: 2px;
     }
 
     .section {
-      margin-bottom: 15px;
-      border-bottom: 1px dashed #444;
+      border-bottom: 1px dashed #999;
+      margin-bottom: 20px;
       padding-bottom: 10px;
     }
 
-    .field {
-      margin: 6px 0;
-      font-size: 1rem;
+    .row {
+      margin-bottom: 8px;
     }
 
     .label {
-      font-weight: bold;
       display: inline-block;
-      min-width: 150px;
+      width: 160px;
+      font-weight: bold;
     }
 
     .value {
@@ -77,73 +51,50 @@
     }
 
     .message {
-      text-align: center;
+      margin-top: 20px;
       font-style: italic;
-      font-weight: bold;
-      margin-top: 10px;
+      text-align: center;
+      font-weight: 600;
     }
 
     .footer {
       text-align: right;
-      font-size: 0.9rem;
-      margin-top: 20px;
-    }
-
-    @media print {
-      body {
-        background: none !important;
-        margin: 0;
-        padding: 0;
-      }
-
-      .qsl-container {
-        box-shadow: none;
-        width: 100%;
-        max-width: none;
-        height: auto;
-      }
-
-      .qsl-card {
-        background: white !important;
-        backdrop-filter: none !important;
-        color: black;
-      }
+      font-size: 14px;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
 
-<div class="qsl-container">
-  <img class="bg-image" src="https://raw.githubusercontent.com/Rhyzen16/Qrz-gallery/main/1744880701702_Diploma.png" alt="QSL Background" />
-
-  <div class="qsl-card">
+<div class="qsl-card">
+  <div class="header">
     <h1>QSL CONFIRMATION</h1>
+  </div>
 
-    <div class="section">
-      <div class="field"><span class="label">From:</span> <span class="value">DY3ZXG</span></div>
-      <div class="field"><span class="label">Name:</span> <span class="value">Rhyzen S. Bautista</span></div>
-      <div class="field"><span class="label">QTH:</span> <span class="value">San Fernando, Pampanga, Philippines</span></div>
-    </div>
+  <div class="section">
+    <div class="row"><span class="label">From:</span> <span class="value">N0CALL</span></div>
+    <div class="row"><span class="label">Name:</span> <span class="value">John Doe</span></div>
+    <div class="row"><span class="label">QTH:</span> <span class="value">Denver, CO, USA</span></div>
+  </div>
 
-    <div class="section">
-      <div class="field"><span class="label">To Radio:</span> <span class="value">N0CALL</span></div>
-      <div class="field"><span class="label">Date:</span> <span class="value">2025-06-10</span></div>
-      <div class="field"><span class="label">Time (UTC):</span> <span class="value">14:25</span></div>
-      <div class="field"><span class="label">Band:</span> <span class="value">20m</span></div>
-      <div class="field"><span class="label">Frequency:</span> <span class="value">14.074 MHz</span></div>
-      <div class="field"><span class="label">Mode:</span> <span class="value">FT8</span></div>
-      <div class="field"><span class="label">RST Sent:</span> <span class="value">599</span></div>
-      <div class="field"><span class="label">RST Received:</span> <span class="value">579</span></div>
-    </div>
+  <div class="section">
+    <div class="row"><span class="label">To Radio:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Date:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Time (UTC):</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Band:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Frequency:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">Mode:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">RST Sent:</span> <span class="value">__________</span></div>
+    <div class="row"><span class="label">RST Received:</span> <span class="value">__________</span></div>
+  </div>
 
-    <div class="message">
-      TNX FOR THE QSO &amp; NICE TO MEET YOU ON THE AIR!<br />
-      73 &amp; BEST DX!
-    </div>
+  <div class="message">
+    TNX FOR THE QSO &amp; NICE TO MEET YOU ON THE AIR!<br />
+    73 &amp; BEST DX!
+  </div>
 
-    <div class="footer">
-      Signed: ____________________ &nbsp;&nbsp; | &nbsp;&nbsp; Grid: PK04KW
-    </div>
+  <div class="footer">
+    Signed: ____________________ &nbsp;&nbsp; | &nbsp;&nbsp; Grid: __________
   </div>
 </div>
 
